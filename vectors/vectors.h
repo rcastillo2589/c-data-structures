@@ -22,7 +22,7 @@ static void vector_resize(vector *, int);
 /* Get capacity */
 int vector_capacity(vector *);
 /* Check if empty */
-bool vector_empty(vector *);
+int vector_empty(vector *);
 /* get value at index */
 void* vector_at(vector *, int);
 /* Push value to end */
@@ -32,9 +32,9 @@ void vector_prepend(vector *, void *);
 /* Get top most value */
 void* vector_pop(vector *);
 /* Find value and remove it */
-void vector_remove(void *, void *);
+void vector_remove(vector *, void *);
 /* Find item and return index */
-int vector_find(void *, void *);
+int vector_find(vector *, void *);
 
 // size()
 // capacity()

@@ -16,6 +16,12 @@ int main(void)
   int *four_ptr = &four;
   int five = 5;
   int *five_ptr = &five;
+  int six = 6;
+  int *six_ptr = &six;
+  int seven = 7;
+  int *seven_ptr = &seven;
+  int zero = 0;
+  int *zero_ptr = &zero;
 
   int i;
   vector v_string;
@@ -23,6 +29,9 @@ int main(void)
 
   vector_init(&v_string);
   vector_init(&v_int);
+
+  printf("IsEmpty: %s\n", vector_empty(&v_string) ? "true" : "false");
+  printf("Capacity: %d\n", vector_capacity(&v_string));
 
   // 1
   vector_insert(&v_string, "one");
@@ -40,19 +49,51 @@ int main(void)
   vector_insert(&v_string, "five");
   vector_insert(&v_int, five_ptr);
 
+  printf("Capacity: %d\n", vector_capacity(&v_string));
+
+  printf("Insert 1 - 5\n");
+  printf("(Loop start)\n");
   // Same length for both vectors
   for(i = 0; i < vector_size(&v_int); i++) {
-    printf("%s=%d\n", (char*)v_string.data[i], *(int*)v_int.data[i]);
+    printf("%s=%d\n", (char*)vector_at(&v_string, i), *(int*)vector_at(&v_int, i));
   }
+  printf("(Loop end)\n\n");
 
   vector_delete(&v_string, 0);
   vector_delete(&v_string, 0);
   vector_delete(&v_int, 0);
   vector_delete(&v_int, 0);
 
+  printf("Delete position 0 2x\n");
+  printf("(Loop start)\n");
   for(i = 0; i < vector_size(&v_string); i++) {
-    printf("%s=%d\n", (char*)v_string.data[i], *(int*)v_int.data[i]);
+    printf("%s=%d\n", (char*)vector_at(&v_string, i), *(int*)vector_at(&v_int, i));
   }
+  printf("(Loop end)\n\n");
+
+  vector_push(&v_string, "six");
+  vector_push(&v_int, six_ptr);
+  vector_push(&v_string, "seven");
+  vector_push(&v_int, seven_ptr);
+  vector_prepend(&v_string, "zero");
+  vector_prepend(&v_int, zero_ptr);
+
+  printf("Push 6 & 7 Prepend 0\n");
+  printf("(Loop start)\n");
+  for(i = 0; i < vector_size(&v_string); i++) {
+    printf("%s=%d\n", (char*)vector_at(&v_string, i), *(int*)vector_at(&v_int, i));
+  }
+  printf("(Loop end)\n\n");
+
+  printf("%s=%d\n", (char*)vector_pop(&v_string), *(int*)vector_pop(&v_int));
+  printf("%s=%d\n", (char*)vector_pop(&v_string), *(int*)vector_pop(&v_int));
+
+  printf("Pop 2x\n");
+  printf("(Loop start)\n");
+  for(i = 0; i < vector_size(&v_string); i++) {
+    printf("%s=%d\n", (char*)vector_at(&v_string, i), *(int*)vector_at(&v_int, i));
+  }
+  printf("(Loop end)\n\n");
 
   return 0;
 }

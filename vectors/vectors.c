@@ -58,13 +58,13 @@ int vector_capacity(vector *v)
   return v->capacity;
 }
 
-bool vector_empty(vector *v)
+int vector_empty(vector *v)
 {
   if(v->length == 0) {
-    return true;
+    return 1;
   }
 
-  return false;
+  return 0;
 }
 
 void* vector_at(vector *v, int at)
@@ -109,19 +109,21 @@ void* vector_pop(vector *v)
   void *value;
 
   if(v->length != 0) {
-    value = v->data[length - 1];
-    v->data[length - 1] = NULL;
+    value = v->data[v->length - 1];
+    v->data[v->length - 1] = NULL;
     v->length--;
 
     if(v->length == v->capacity / 4) {
       vector_resize(v, v->capacity / 2);
     }
+
+    return value;
   }
 
   return NULL;
 }
 
-void vector_remove(void *v, void *value)
+void vector_remove(vector *v, void *value)
 {
   int i;
 
@@ -140,7 +142,7 @@ void vector_remove(void *v, void *value)
   }
 }
 
-int vector_find(void *v, void *value)
+int vector_find(vector *v, void *value)
 {
   int i;
 
