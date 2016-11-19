@@ -10,6 +10,23 @@ void linked_list_init(linkedlist *ll)
   ll->length = 0;
 }
 
+void linked_list_print(linkedlist *ll)
+{
+  int i;
+  node_t *current;
+
+  if(ll->head != NULL) {
+    current = ll->head;
+
+    printf("(LOOP START)\n");
+    while(current != NULL) {
+      printf("%s\n", current->data);
+      current = current->next;
+    }
+    printf("(LOOP END)\n");
+  }
+}
+
 int linked_list_size(linkedlist *ll)
 {
   return ll->length;
@@ -28,6 +45,7 @@ char* linked_list_value_at(linkedlist *ll, int position)
 {
   int count;
   node_t *current;
+  node_t *value;
 
   if(ll->head == NULL) {
     return NULL;
@@ -35,16 +53,16 @@ char* linked_list_value_at(linkedlist *ll, int position)
     count = 0;
     current = ll->head;
 
-    while(current->next != NULL || count != position) {
+    while(current != NULL) {
+      if(count == position) {
+        value = current;
+      }
+
       current = current->next;
       count++;
     }
 
-    if(count != position) {
-      return NULL;
-    }
-
-    return current->data;
+    return value->data;
   }
 }
 

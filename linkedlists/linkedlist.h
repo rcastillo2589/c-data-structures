@@ -17,6 +17,7 @@ typedef struct {
 } linkedlist;
 
 void linked_list_init(linkedlist *);
+void linked_list_print(linkedlist *);
 int linked_list_size(linkedlist *);
 int linked_list_empty(linkedlist *);
 char* linked_list_value_at(linkedlist *, int);
