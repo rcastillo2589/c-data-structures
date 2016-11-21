@@ -92,6 +92,7 @@ char* linked_list_pop_front(linkedlist *ll)
   } else {
       value = ll->head;
       ll->head = ll->head->next;
+      ll->length--;
 
       return value->data;
   }
@@ -137,6 +138,7 @@ char* linked_list_pop_back(linkedlist *ll)
 
       value = current;
       previous->next = NULL;
+      ll->length--;
 
       return value->data;
   }
@@ -183,6 +185,7 @@ void linked_list_insert(linkedlist *ll, int position, char *value)
     return;
   } else if(ll->head == NULL && position == 0) {
     ll->head == newNode;
+    ll->length++;
   } else {
     current = ll->head;
 
@@ -190,6 +193,7 @@ void linked_list_insert(linkedlist *ll, int position, char *value)
       if(count == position) {
         previous->next = newNode;
         newNode->next = current;
+        ll->length++;
         break;
       }
       previous = current;
@@ -207,17 +211,89 @@ void linked_list_erase(linkedlist *ll, int position)
 
   if(position == 0) {
     ll->head = ll->head->next;
+    ll->length--;
   } else {
     current = ll->head;
 
     while(current != NULL) {
       if(count == position) {
         previous->next = current->next;
+        ll->length--;
         break;
       }
       previous = current;
       current = current->next;
       count++;
+    }
+  }
+}
+
+char* linked_list_value_from_end(linkedlist *ll, int position)
+{
+  node_t *current;
+  int fromFront;
+  int count = 0;
+
+  if(ll->length > position) {
+    current = ll->head;
+    fromFront = (ll->length - position) - 1;
+
+    while(current != NULL) {
+      if(fromFront == count) {
+        return current->data;
+      }
+      current = current->next;
+      count++;
+    }
+  }
+
+  return NULL;
+}
+
+void linked_list_reverse(linkedlist *ll)
+{
+  int i;
+  node_t *previous = NULL;
+  node_t *current;
+  node_t *front;
+
+  if(ll->head == NULL) {
+    return;
+  } else {
+    current = ll->head;
+    front = current->next;
+
+    while(front != NULL) {
+      current->next = previous;
+      
+      previous = current;
+      current = front;
+      front = current->next;
+    }
+
+    ll->head = current;
+    ll->head->next = previous;
+  }
+}
+
+void linked_list_remove(linkedlist *ll, char *value)
+{
+  node_t *current;
+  node_t *previous;
+
+  if(value == NULL) {
+    return;
+  } else {
+    current = ll->head;
+
+    while(current != NULL) {
+      if(current->data == value) {
+        previous->next = current->next;
+        ll->length--;
+        break;
+      }
+      previous = current;
+      current = current->next;
     }
   }
 }

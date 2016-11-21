@@ -42,4 +42,16 @@ int main(void)
   linked_list_erase(&llist, 0);
 
   linked_list_print(&llist);
+
+  printf("1 from end: %s\n", linked_list_value_from_end(&llist, 1));
+  printf("2 from end: %s\n", linked_list_value_from_end(&llist, 2));
+
+  linked_list_reverse(&llist);
+  linked_list_print(&llist);
+
+  linked_list_remove(&llist, "six");
+  linked_list_remove(&llist, "one");
+
+  linked_list_reverse(&llist);
+  linked_list_print(&llist);
 }

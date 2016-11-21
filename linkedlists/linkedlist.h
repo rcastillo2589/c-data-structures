@@ -29,11 +29,6 @@ char* linked_list_front(linkedlist *);
 char* linked_list_back(linkedlist *);
 void linked_list_insert(linkedlist *, int, char *);
 void linked_list_erase(linkedlist *, int);
-
-/*
- insert(index, value) - insert value at index, so current item at that index is pointed to by new item at index
- erase(index) - removes node at given index
- value_n_from_end(n) - returns the value of the node at nth position from the end of the list
- reverse() - reverses the list
- remove_value(value) - removes the first item in the list with this value
- */
+char* linked_list_value_from_end(linkedlist *, int);
+void linked_list_reverse(linkedlist *);
+void linked_list_remove(linkedlist *, char *);
