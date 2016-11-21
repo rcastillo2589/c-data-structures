@@ -31,4 +31,15 @@ int main(void)
   printf("Pop back: %s\n", linked_list_pop_back(&llist));
 
   linked_list_print(&llist);
+
+  linked_list_insert(&llist, 1, "four");
+  linked_list_insert(&llist, 1, "five");
+  linked_list_insert(&llist, 2, "six");
+
+  linked_list_print(&llist);
+
+  linked_list_erase(&llist, 3);
+  linked_list_erase(&llist, 0);
+
+  linked_list_print(&llist);
 }

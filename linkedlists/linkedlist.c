@@ -167,3 +167,57 @@ char* linked_list_back(linkedlist *ll)
 
   return NULL;
 }
+
+void linked_list_insert(linkedlist *ll, int position, char *value)
+{
+  node_t *previous;
+  node_t *current;
+  node_t *newNode;
+  int count = 0;
+
+  newNode = malloc(sizeof(node_t));
+  newNode->data = value;
+  newNode->next = NULL;
+
+  if(ll->head == NULL && position > 0) {
+    return;
+  } else if(ll->head == NULL && position == 0) {
+    ll->head == newNode;
+  } else {
+    current = ll->head;
+
+    while(current != NULL) {
+      if(count == position) {
+        previous->next = newNode;
+        newNode->next = current;
+        break;
+      }
+      previous = current;
+      current = current->next;
+      count++;
+    }
+  }
+}
+
+void linked_list_erase(linkedlist *ll, int position)
+{
+  node_t *current;
+  node_t *previous;
+  int count = 0;
+
+  if(position == 0) {
+    ll->head = ll->head->next;
+  } else {
+    current = ll->head;
+
+    while(current != NULL) {
+      if(count == position) {
+        previous->next = current->next;
+        break;
+      }
+      previous = current;
+      current = current->next;
+      count++;
+    }
+  }
+}

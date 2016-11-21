@@ -27,6 +27,8 @@ void linked_list_push_back(linkedlist *, char *);
 char* linked_list_pop_back(linkedlist *);
 char* linked_list_front(linkedlist *);
 char* linked_list_back(linkedlist *);
+void linked_list_insert(linkedlist *, int, char *);
+void linked_list_erase(linkedlist *, int);
 
 /*
  insert(index, value) - insert value at index, so current item at that index is pointed to by new item at index
